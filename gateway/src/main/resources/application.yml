@@ -1,0 +1,10 @@
+# Microservice name
+spring:
+  application:
+    name: gateway
+# Config import
+  config:
+    import: configserver:http://localhost:8888
+# Server port
+server:
+  port: 8765
