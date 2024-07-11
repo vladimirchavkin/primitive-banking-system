@@ -6,7 +6,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/vladimirchavkin/primitive-banking-system
+          uri: https://github.com/vladimirchavkin/primitive-banking-system-prop.git
           clone-on-start: true
           username: vladimirchavkin
           password: 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
