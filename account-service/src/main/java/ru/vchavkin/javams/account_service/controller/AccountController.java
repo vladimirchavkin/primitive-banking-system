@@ -35,8 +35,8 @@ public class AccountController {
 
     // Delete account by id
     @DeleteMapping("/{accountId}")
-    public void deleteAccount(@PathVariable Long accountId) {
-        accountService.deleteById(accountId);
+    public AccountResponseDTO deleteAccount(@PathVariable Long accountId) {
+        return new AccountResponseDTO(accountService.deleteById(accountId));
     }
 
     // Update account
@@ -46,6 +46,7 @@ public class AccountController {
         return new AccountResponseDTO(accountService.updateAccount(accountId, accountRequestDTO.getName(), accountRequestDTO.getEmail(),
                 accountRequestDTO.getPhone(), accountRequestDTO.getBills()));
     }
+
 
 
 }

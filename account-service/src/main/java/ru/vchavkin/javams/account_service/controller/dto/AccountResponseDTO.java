@@ -25,7 +25,7 @@ public class AccountResponseDTO {
     private OffsetDateTime creationDate;
 
     // Constructor
-    public AccountResponseDTO(Long accountId, String name, String email, String phone, List<Long> bills, OffsetDateTime creationDate) {
+    public AccountResponseDTO(Long billId, Long accountId, String name, String email, String phone, List<Long> bills, OffsetDateTime creationDate) {
         this.accountId = accountId;
         this.name = name;
         this.email = email;

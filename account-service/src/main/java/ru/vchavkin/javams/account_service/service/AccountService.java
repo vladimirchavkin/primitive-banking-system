@@ -37,13 +37,10 @@ public class AccountService {
     }
 
     // Delete account by id
-    public void deleteById(Long accountId) {
-        try {
-            accountRepository.deleteById(accountId);
-        } catch (AccountNotFoundException accountNotFoundException) {
-            accountNotFoundException.printStackTrace();
-        }
-
+    public Account deleteById(Long accountId) {
+        Account deletedAccount = getAccountById(accountId);
+        accountRepository.deleteById(accountId);
+        return deletedAccount;
     }
 
     // Update account
