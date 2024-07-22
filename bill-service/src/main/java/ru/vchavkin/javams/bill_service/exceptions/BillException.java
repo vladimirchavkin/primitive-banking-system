@@ -4,8 +4,8 @@ package ru.vchavkin.javams.bill_service.exceptions;
  * @author vladimirchavkinwork@gmail.com
  */
 
-public class BillNotFoundException extends RuntimeException{
-    public BillNotFoundException(String message) {
+public class BillException extends RuntimeException{
+    public BillException(String message) {
         super(message);
     }
 }

@@ -1,5 +1,8 @@
 package ru.vchavkin.javams.account_service.controller.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -8,6 +11,8 @@ import java.util.List;
  */
 
 
+@NoArgsConstructor
+@Getter
 public class AccountRequestDTO {
     private String name;
 
@@ -19,28 +24,4 @@ public class AccountRequestDTO {
 
     private OffsetDateTime creationDate;
 
-    // Constructor
-    public AccountRequestDTO() {
-    }
-
-    // Getters
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public OffsetDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public List<Long> getBills() {
-        return bills;
-    }
 }

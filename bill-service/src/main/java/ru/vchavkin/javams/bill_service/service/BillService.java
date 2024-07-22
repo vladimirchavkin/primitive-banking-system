@@ -1,23 +1,20 @@
 package ru.vchavkin.javams.bill_service.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import ru.vchavkin.javams.bill_service.entity.Bill;
-import ru.vchavkin.javams.bill_service.exceptions.BillNotFoundException;
+import ru.vchavkin.javams.bill_service.exceptions.BillException;
 import ru.vchavkin.javams.bill_service.repository.BillRepository;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+
 
 /**
  * @author vladimirchavkinwork@gmail.com
  */
 
-
+@Slf4j
 @Service
 public class BillService {
 
@@ -28,26 +25,41 @@ public class BillService {
         this.billRepository = billRepository;
     }
 
-    public Bill getBillById(@PathVariable Long billId) {
+    // Create new bill
+    public Long createBill(Long accountId, BigDecimal amount, Boolean isDefault, Boolean overdraftEnabled) {
+        log.info("REST request to create bill with: accountId={}, amount={}, isDefault={}, overdraftEnabled={}",
+                accountId, amount, isDefault, overdraftEnabled);
+        Bill createdBill = new Bill(accountId ,amount, isDefault, overdraftEnabled);
+        log.debug("Saved bill: {}", createdBill);
+        return billRepository.save(createdBill).getBillId();
+    }
+
+    // Get bill by id
+    public Bill getBillById(Long billId) {
+        log.info("REST request to get bill with billId: {}", billId);
         return billRepository.findById(billId).orElseThrow(() ->
-                new BillNotFoundException("Bill with id " + billId + "not found"));
-    }
-
-    public Long createBill(Long accountId, BigDecimal amount, Boolean isDefault, OffsetDateTime creationDate, Boolean overdraftEnabled) {
-        Bill bill = new Bill(accountId, amount, isDefault, OffsetDateTime.now(), overdraftEnabled);
-        return billRepository.save(bill).getBillId();
-    }
-
-    public Bill updateBill(Long billId, Long accountId, BigDecimal amount, Boolean isDefault, Boolean overdraftEnabled) {
-        Bill bill = new Bill(accountId, amount, isDefault, overdraftEnabled);
-        bill.setBillId(billId);
-        return billRepository.save(bill);
+                new BillException("Bill with id " + billId + "not found."));
     }
 
     // Delete bill by id
     public Bill deleteById(Long billId) {
+        log.info("REST request to delete account with accountId: {}", billId);
         Bill deletedBill = getBillById(billId);
         billRepository.deleteById(billId);
+        log.debug("Deleted bill: {}", deletedBill);
         return deletedBill;
+    }
+
+    // Update bill
+    public Bill updateBill(Long billId ,Long accountId, BigDecimal amount, Boolean isDefault, Boolean overdraftEnabled) {
+        log.info("REST request to update bill with: accountId={}, amount={}, isDefault={}, overdraftEnabled={}",
+                accountId, amount, isDefault, overdraftEnabled);
+        Bill updatedBill = getBillById(accountId);
+        updatedBill.setAccountId(accountId);
+        updatedBill.setAmount(amount);
+        updatedBill.setIsDefault(isDefault);
+        updatedBill.setOverdraftEnabled(overdraftEnabled);
+        log.debug("Updated bill: {}", updatedBill);
+        return updatedBill;
     }
 }

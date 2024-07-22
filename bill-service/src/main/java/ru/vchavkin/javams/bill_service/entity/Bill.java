@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -13,6 +16,10 @@ import java.time.OffsetDateTime;
  */
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Bill {
 
     // Fields
@@ -20,96 +27,22 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long billId;
 
+    @NonNull
     private Long accountId;
 
+    @NonNull
     private BigDecimal amount;
 
+    @NonNull
     private Boolean isDefault;
 
-    private OffsetDateTime creationDate;
+    @CreationTimestamp
+    private OffsetDateTime createdAt;
 
+    @UpdateTimestamp
+    private OffsetDateTime updatedAt;
+
+    @NonNull
     private Boolean overdraftEnabled;
 
-
-    // Constructors
-    public Bill(Long accountId, BigDecimal amount, Boolean isDefault, OffsetDateTime creationDate, Boolean overdraftEnabled) {
-        this.accountId = accountId;
-        this.amount = amount;
-        this.isDefault = isDefault;
-        this.creationDate = creationDate;
-        this.overdraftEnabled = overdraftEnabled;
-    }
-
-    public Bill(Long accountId, BigDecimal amount, Boolean isDefault, Boolean overdraftEnabled) {
-        this.accountId = accountId;
-        this.amount = amount;
-        this.isDefault = isDefault;
-        this.overdraftEnabled = overdraftEnabled;
-    }
-
-    public Bill() {
-    }
-
-    // ToString
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "billId=" + billId +
-                ", accountId=" + accountId +
-                ", amount=" + amount +
-                ", isDefault=" + isDefault +
-                ", creationDate=" + creationDate +
-                ", overdraftEnabled=" + overdraftEnabled +
-                '}';
-    }
-
-
-    // Getters and Setters
-    public Long getBillId() {
-        return billId;
-    }
-
-    public void setBillId(Long billId) {
-        this.billId = billId;
-    }
-
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Boolean getDefault() {
-        return isDefault;
-    }
-
-    public void setDefault(Boolean aDefault) {
-        isDefault = aDefault;
-    }
-
-    public OffsetDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(OffsetDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Boolean getOverdraftEnabled() {
-        return overdraftEnabled;
-    }
-
-    public void setOverdraftEnabled(Boolean overdraftEnabled) {
-        this.overdraftEnabled = overdraftEnabled;
-    }
 }

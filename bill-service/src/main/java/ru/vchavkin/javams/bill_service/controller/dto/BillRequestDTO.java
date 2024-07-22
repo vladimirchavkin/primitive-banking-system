@@ -1,5 +1,11 @@
 package ru.vchavkin.javams.bill_service.controller.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
@@ -7,6 +13,8 @@ import java.time.OffsetDateTime;
  * @author vladimirchavkinwork@gmail.com
  */
 
+@NoArgsConstructor
+@Getter
 public class BillRequestDTO {
 
     // Fields
@@ -16,32 +24,10 @@ public class BillRequestDTO {
 
     private Boolean isDefault;
 
-    private OffsetDateTime creationDate;
+    private OffsetDateTime createdAt;
+
+    private OffsetDateTime updatedAt;
 
     private Boolean overdraftEnabled;
 
-    // Constructor
-    public BillRequestDTO() {
-    }
-
-    // Getters
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public Boolean getDefault() {
-        return isDefault;
-    }
-
-    public OffsetDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public Boolean getOverdraftEnabled() {
-        return overdraftEnabled;
-    }
 }

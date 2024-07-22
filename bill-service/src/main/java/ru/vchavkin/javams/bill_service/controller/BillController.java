@@ -30,7 +30,7 @@ public class BillController {
     @PostMapping("/")
     public Long createBill(@RequestBody BillRequestDTO billRequestDTO) {
         return billService.createBill(billRequestDTO.getAccountId(), billRequestDTO.getAmount(),
-                billRequestDTO.getDefault(), billRequestDTO.getCreationDate(), billRequestDTO.getOverdraftEnabled());
+                billRequestDTO.getIsDefault(), billRequestDTO.getOverdraftEnabled());
     }
 
     // Delete bill
@@ -44,6 +44,6 @@ public class BillController {
     public BillResponseDTO updateBill(@PathVariable Long billId,
                                       @RequestBody BillRequestDTO billRequestDTO) {
         return new BillResponseDTO(billService.updateBill(billId, billRequestDTO.getAccountId(), billRequestDTO.getAmount(),
-                billRequestDTO.getDefault(), billRequestDTO.getOverdraftEnabled()));
+                billRequestDTO.getIsDefault(), billRequestDTO.getOverdraftEnabled()));
     }
 }
