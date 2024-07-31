@@ -1,21 +1,45 @@
 # Application name
 spring:
-    application:
-        name: account-service
-# Config import
+  application:
+    name: account-service
+  # Config import
+  config:
+    import: configserver:http://localhost:8888
+  # Config profile
+  cloud:
     config:
-        import: configserver:http://localhost:8888
-# Config profile
-    cloud:
-        config:
-            profile: service
-# DB config
-    datasource:
-        driver-class-name: org.postgresql.Driver
-        username: postgres
-        password: postgres
-        url: jdbc:postgresql://localhost:5432/account-service-db
-    jpa:
-        database-platform: org.hibernate.dialect.PostgreSQLDialect
-        hibernate:
-            ddl-auto: create
+      profile: service
+  # DB config
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/account-service-db
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
+
+# SpringDoc
+springdoc:
+  info:
+    title: "Account Service."
+    version: "0.0.1"
+    description: "This API exposes endpoints for account service."
+  servers:
+    - url: "http://localhost:8080"
+      description: "Local Server."
+    - url: "http://localhost:8080"
+      description: "Dev Server."
+    - url: "http://localhost:8080"
+      description: "Prod Server."
+  api-docs:
+    enabled: true
+    path: "/account-service-api-docs"
+  swagger-ui:
+    enabled: true
+    path: "/account-service-documentation"
+    try-it-out-enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+    filter: true
