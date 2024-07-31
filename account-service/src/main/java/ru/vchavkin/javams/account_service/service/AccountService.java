@@ -26,12 +26,12 @@ public class AccountService {
     }
 
     // Create new account
-    public Long createAccount(String name, String email, String phone, List<Long> bills) {
+    public Account createAccount(String name, String email, String phone, List<Long> bills) {
         log.info("REST request to create account with: name={}, email={}, phone={}, bills={}",
                 name, email, phone, bills);
         Account createdAccount = new Account(name, email, phone, bills);
         log.debug("Saved account: {}", createdAccount);
-        return accountRepository.save(createdAccount).getAccountId();
+        return accountRepository.save(createdAccount);
     }
 
     // Get account by id
