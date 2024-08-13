@@ -26,12 +26,12 @@ public class BillService {
     }
 
     // Create new bill
-    public Long createBill(Long accountId, BigDecimal amount, Boolean isDefault, Boolean overdraftEnabled) {
+    public Bill createBill(Long accountId, BigDecimal amount, Boolean isDefault, Boolean overdraftEnabled) {
         log.info("REST request to create bill with: accountId={}, amount={}, isDefault={}, overdraftEnabled={}",
                 accountId, amount, isDefault, overdraftEnabled);
         Bill createdBill = new Bill(accountId ,amount, isDefault, overdraftEnabled);
         log.debug("Saved bill: {}", createdBill);
-        return billRepository.save(createdBill).getBillId();
+        return billRepository.save(createdBill);
     }
 
     // Get bill by id

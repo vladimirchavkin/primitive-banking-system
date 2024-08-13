@@ -64,7 +64,6 @@ public class AccountController {
                             contentMediaType = "application/json"
                     ))
             })
-
     })
     @GetMapping("/{accountId}")
     public AccountResponseDTO getAccountById(@PathVariable Long accountId) {
@@ -74,7 +73,7 @@ public class AccountController {
     /**
      * Create account.
      *
-     * @param AccountRequestDTO for creating account.
+     * @param accountRequestDTO for creating account.
      * @return Created account response.
      */
     @Operation(
@@ -109,7 +108,6 @@ public class AccountController {
                             contentMediaType = "application/json"
                     ))
             })
-
     })
     @PostMapping("/")
     public AccountResponseDTO createAccount(@RequestBody AccountRequestDTO accountRequestDTO) {
@@ -155,7 +153,6 @@ public class AccountController {
                             contentMediaType = "application/json"
                     ))
             })
-
     })
     @DeleteMapping("/{accountId}")
     public AccountResponseDTO deleteAccount(@PathVariable Long accountId) {
@@ -166,7 +163,7 @@ public class AccountController {
      * Update account.
      *
      * @param accountId Account id
-     * @param AccountRequestDTO DTO for update account.
+     * @param accountRequestDTO DTO for update account.
      * @return Updated account response.
      */
     @Operation(
@@ -201,7 +198,6 @@ public class AccountController {
                             contentMediaType = "application/json"
                     ))
             })
-
     })
     @PutMapping("/{accountId}")
     public AccountResponseDTO updateAccount(@PathVariable Long accountId,

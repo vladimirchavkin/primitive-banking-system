@@ -1,4 +1,4 @@
-package ru.vchavkin.javams.account_service.configuration;
+package ru.vchavkin.javams.bill_service.configuration;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -36,5 +36,4 @@ public class OpenApiProperties {
 
         private String description;
     }
-
 }
